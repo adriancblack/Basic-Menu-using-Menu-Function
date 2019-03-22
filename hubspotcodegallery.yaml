@@ -1,7 +1,6 @@
-title: Code Gallery Sample Entry
-description: |
-  Code
-categories: Menus and navigation, Galleries, Buttons
+title: Menu Module Starter
+description: A starter script for quickly building HubSpot menu's using the menu() function. A tutorial explaining how this works is available on Braces.
+categories: Menus and navigation
 demo_url: https://example.com/demo
 video_url: https://example.com/video
 hubspot_url: https://marketplace.hubspot.com/path/to/listing
