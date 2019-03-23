@@ -1,1 +1,1 @@
-// JavaScript code goes here
+// No JS needed
