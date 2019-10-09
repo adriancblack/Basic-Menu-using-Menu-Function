@@ -8,7 +8,6 @@
   <input type="checkbox" id="sm{{looop}}_{{depth}}">
   <ul class="sub-menu">
     {% set depth = depth + 1%}
-    {% set looop = looop + 1%}
     {%- for sublink in link.children -%}
     {{render_link_item(sublink,depth,loop.index)}}
     {%- endfor -%}
