@@ -1,24 +1,35 @@
-{%- macro render_link_item(link,depth)-%}
-  {%- if link != [] && link.label -%}
-    <li class="hs-menu-item hs-menu-depth-{{depth}} {{'hs-item-has-children' if link.children}}" aria-role="none" {{'aria-haspopup="true"' if link.children}}>
-      <a href="{{link.url if link.url else '#'}}" aria-role="menuitem">{{link.label}}</a>
-      {%- if link.children -%}
-      <ul class="hs-menu-children-wrapper" aria-role="menu">
-        {% set depth = depth + 1%}
-        {%- for sublink in link.children -%}
-        {{render_link_item(sublink,depth)}}
-        {%- endfor -%}
-      </ul>
-      {%- endif -%}
-    </li>
+{%- macro render_link_item(link,depth,looop)-%}
+{%- if link != [] && link.label -%}
+<li>
+  <a href="{{link.url if link.url else '#'}}">{{link.label}}</a>
+  {%- if link.children -%}
+  <span class="drop-icon">▸</span>
+  <label title="Toggle Drop-down" class="drop-icon" for="sm{{looop}}_{{depth}}">▾</label>
+  <input type="checkbox" id="sm{{looop}}_{{depth}}">
+  <ul class="sub-menu">
+    {% set depth = depth + 1%}
+    {% set looop = looop + 1%}
+    {%- for sublink in link.children -%}
+    {{render_link_item(sublink,depth,loop.index)}}
+    {%- endfor -%}
+  </ul>
   {%- endif -%}
+</li>
+{%- endif -%}
 {%- endmacro -%}
-  <nav class="sc-site-header__menu sc-site-header__menu--{{ module.menu_field }} hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" aria-label="{{menu_name}} menu">
-      {#-{% menu id="{{ menu_id }}" %}-#}
-      {% set menu = menu(module.menu_field , "site_root").children %}
-      <ul aria-role="menubar">
-       {% for link in menu %}
-        {{render_link_item(link,1)}}
-       {% endfor %}
-      </ul>
-  </nav>
+
+
+{% set menu = menu(module.menu_field , "site_root").children %}
+
+<nav id="menu">
+  <label for="tm" id="toggle-menu">Navigation <span class="drop-icon">▾</span></label>
+  <input type="checkbox" id="tm">
+  <ul class="main-menu cf">
+
+    {% for link in menu %}   
+    {{render_link_item(link,1,loop.index)}}
+    {% endfor %}
+
+
+  </ul>
+</nav>
