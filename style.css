@@ -116,7 +116,10 @@
     float: left;
     border-width: 0 1px 0 0;
   }
-
+  #menu li.active-branch > a,
+  #menu li.active > a {
+    color:#02b4e6;
+  }
   #menu .sub-menu li {
     float: none;
   }
