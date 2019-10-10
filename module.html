@@ -1,6 +1,6 @@
 {%- macro render_link_item(link,depth,looop)-%}
 {%- if link != [] && link.label -%}
-<li>
+<li class="{% if link.activeBranch %}active-branch{% endif %} {% if link.activeNode %}active{% endif %}">
   <a href="{{link.url if link.url else '#'}}">{{link.label}}</a>
   {%- if link.children -%}
   <span class="drop-icon">▸</span>
